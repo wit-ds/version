@@ -113,12 +113,12 @@ jobs:
           cosign sign --yes ghcr.io/wit-ds/version/${{ matrix.path }}
           cosign sign-blob --yes ${{ matrix.path }} --bundle ${{ matrix.path }}.sig
 
-      - name: Upload signature
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 sync . s3://version.home-assistant.io --exclude "*" --include "${{ matrix.path }}.sig"
+      # - name: Upload signature
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: |
+      #     aws s3 sync . s3://version.home-assistant.io --exclude "*" --include "${{ matrix.path }}.sig"
 
 
   # upload:
