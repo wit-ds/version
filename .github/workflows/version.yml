@@ -172,7 +172,7 @@ jobs:
         server-dir: /config/www/version/
         local-dir: ./files2FTP/
       
-    - name: Gather files for cache flush
+    - name: Gather files for cache flush (todo)
       id: flush
       run: |
         declare -a files
@@ -185,7 +185,6 @@ jobs:
           fi
         done
         echo "files=[$(echo ${files[@]} | rev | cut -c 2- | rev)]" >> $GITHUB_OUTPUT
-        echo ${{ steps.flush.outputs.files }}
 
     # - name: Flush CloudFlare cache
     #   run: |
