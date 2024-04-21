@@ -178,13 +178,14 @@ jobs:
         declare -a files
         for file in ${{ needs.prepare.outputs.files }}; do
           if [[ "$file" =~ \.txt|\.json ]]; then
-            files+=("\"https:\/\/version.home-assistant.io\/$file\", ")
+            files+=("\"https:\/\/ma-maison.fun\/local\/version\/$file\", ")
             if [[ "${{ env.SIGNED_FILES }}" =~ $file ]]; then
-              files+=("\"https:\/\/version.home-assistant.io\/$file.sig\", ")
+              files+=("\"https:\/\/ma-maison.fun\/local\/version\/sig\/$file.sig\", ")
             fi
           fi
         done
         echo "files=[$(echo ${files[@]} | rev | cut -c 2- | rev)]" >> $GITHUB_OUTPUT
+        echo ${{ steps.flush.outputs.files }}}
 
     # - name: Flush CloudFlare cache
     #   run: |
