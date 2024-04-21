@@ -185,7 +185,7 @@ jobs:
           fi
         done
         echo "files=[$(echo ${files[@]} | rev | cut -c 2- | rev)]" >> $GITHUB_OUTPUT
-        echo ${{ steps.flush.outputs.files }}}
+        echo ${{ steps.flush.outputs.files }}
 
     # - name: Flush CloudFlare cache
     #   run: |
