@@ -122,7 +122,7 @@ jobs:
           server: ${{ secrets.MAMAISONFUN_FTP_HOST }}
           username: ${{ secrets.MAMAISONFUN_FTP_LOGIN }}
           password: ${{ secrets.MAMAISONFUN_FTP_PSWD }}
-          server-dir: /media/version/sig/
+          server-dir: /config/www/version/sig/
           local-dir: ./sigfiles/
         
       # - name: Upload signature
@@ -169,7 +169,7 @@ jobs:
         server: ${{ secrets.MAMAISONFUN_FTP_HOST }}
         username: ${{ secrets.MAMAISONFUN_FTP_LOGIN }}
         password: ${{ secrets.MAMAISONFUN_FTP_PSWD }}
-        server-dir: /media/version/
+        server-dir: /config/www/version/
         local-dir: ./files2FTP/
       
     - name: Gather files for cache flush
