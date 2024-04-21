@@ -101,8 +101,8 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Install AWS CLI
-        run: pip install awscli
+      # - name: Install AWS CLI
+      #   run: pip install awscli
       
       - name: Upload file
         run: |
@@ -112,7 +112,19 @@ jobs:
         run: |
           cosign sign --yes ghcr.io/wit-ds/version/${{ matrix.path }}
           cosign sign-blob --yes ${{ matrix.path }} --bundle ${{ matrix.path }}.sig
+          mkdir ./sigfiles
+          mv ${{ matrix.path }}.sig ./sigfiles/${{ matrix.path }}.sig
+          echo ls -al .
 
+      - name: Upload signature
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.MAMAISONFUN_FTP_HOST }}
+          username: ${{ secrets.MAMAISONFUN_FTP_LOGIN }}
+          password: ${{ secrets.MAMAISONFUN_FTP_PSWD }}
+          server-dir: /media/version/
+          local-dir: ./sigfiles/
+        
       # - name: Upload signature
       #   env:
       #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
